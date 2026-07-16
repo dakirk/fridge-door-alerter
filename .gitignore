@@ -1,0 +1,5 @@
+# Contains the ntfy topic (a shared secret)
+config.toml
+
+.venv/
+__pycache__/

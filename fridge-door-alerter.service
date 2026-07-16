@@ -1,0 +1,26 @@
+# Install:
+#   sudo cp fridge-door-alerter.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now fridge-door-alerter
+# Logs:
+#   journalctl -u fridge-door-alerter -f
+# Adjust User= and the two paths if your username or checkout differs.
+
+[Unit]
+Description=Fridge door BLE monitor and alerter
+After=bluetooth.target
+Wants=bluetooth.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/fridge-door-alerter
+ExecStart=/home/pi/fridge-door-alerter/.venv/bin/python main.py
+Restart=on-failure
+RestartSec=5
+# If BLE scanning fails with a D-Bus permission error under systemd, first try
+# adding the user to the bluetooth group; if that isn't enough, uncomment:
+#AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW
+
+[Install]
+WantedBy=multi-user.target

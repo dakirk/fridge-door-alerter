@@ -1,0 +1,19 @@
+# Copy to config.toml and fill in your ntfy topic.
+# config.toml is gitignored -- the topic is a shared secret.
+
+[ntfy]
+server = "https://ntfy.sh"
+# Generate an unguessable topic, e.g.:  echo "fridge-$(openssl rand -hex 8)"
+# Subscribe to the same topic in the ntfy phone app.
+topic = ""
+
+[alerts]
+open_threshold_seconds = 120  # door open this long -> push notification
+realert_minutes = 10          # re-notify while it stays open
+offline_minutes = 5           # no broadcasts this long -> offline alert
+battery_low_percent = 20      # below this -> daily-capped battery alert
+send_recovery = true          # notify when the door closes after an alert
+
+[web]
+host = "0.0.0.0"
+port = 8000
