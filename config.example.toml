@@ -8,7 +8,7 @@ server = "https://ntfy.sh"
 topic = ""
 
 [alerts]
-open_threshold_seconds = 120  # door open this long -> push notification
+open_threshold_seconds = 30   # door open this long -> push notification
 realert_minutes = 10          # re-notify while it stays open
 offline_minutes = 5           # no broadcasts this long -> offline alert
 battery_low_percent = 20      # below this -> daily-capped battery alert

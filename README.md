@@ -84,7 +84,7 @@ the service, re-subscribe on the phone.
 ```
 
 Status page: `http://<pi>:8000/`. Test the pipeline: hold the door "open"
-(no magnet) for 2+ minutes → phone notification; restore the magnet →
+(no magnet) for 30+ seconds → phone notification; restore the magnet →
 recovery notification.
 
 ### 4. Install as a service
@@ -93,7 +93,7 @@ See the comments in `fridge-door-alerter.service`.
 
 ## Alert rules (all configurable in config.toml)
 
-- Door open > 2 min → high-priority push, repeated every 10 min until closed,
+- Door open > 30 s → high-priority push, repeated every 10 min until closed,
   with a recovery note when it closes.
 - No advertisements for 5 min → "sensor offline" (dead battery / range).
 - Battery below 20% → push, at most once per day.

@@ -20,7 +20,7 @@ log = logging.getLogger("main")
 DEFAULTS = {
     "ntfy": {"server": "https://ntfy.sh", "topic": ""},
     "alerts": {
-        "open_threshold_seconds": 120,
+        "open_threshold_seconds": 30,
         "realert_minutes": 10,
         "offline_minutes": 5,
         "battery_low_percent": 20,
