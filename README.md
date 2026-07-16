@@ -37,15 +37,45 @@ spotty at the real fridge-to-Pi distance, shorten
 If scanning fails with a D-Bus/permission error, add yourself to the
 bluetooth group: `sudo usermod -aG bluetooth $USER` (then log out and in).
 
-### 2. Configure
+### 2. Configure ntfy
 
-```sh
-cp config.example.toml config.toml
-```
+[ntfy](https://ntfy.sh) delivers the push notifications. It needs no
+account: anyone who POSTs to a topic name reaches everyone subscribed to
+that topic. The topic name is therefore the only secret — treat it like a
+password.
 
-Set the ntfy topic to something unguessable, e.g.
-`fridge-$(openssl rand -hex 8)` — it's the only thing protecting your
-notifications — and subscribe to the same topic in the ntfy phone app.
+1. Generate an unguessable topic name on the Pi:
+
+   ```sh
+   echo "fridge-$(openssl rand -hex 8)"
+   ```
+
+2. Put it in the config:
+
+   ```sh
+   cp config.example.toml config.toml
+   nano config.toml   # set topic = "fridge-<your-random-suffix>"
+   ```
+
+   Leave `server = "https://ntfy.sh"` as is (change it only if you later
+   self-host ntfy).
+
+3. Subscribe on your phone: install the ntfy app
+   ([Android](https://play.google.com/store/apps/details?id=io.heckel.ntfy) /
+   [iOS](https://apps.apple.com/us/app/ntfy/id1625396347)), then
+   **+ / Subscribe to topic** and enter the exact same topic name.
+
+4. Test the path end-to-end before involving the sensor:
+
+   ```sh
+   curl -d "hello from the pi" ntfy.sh/fridge-<your-random-suffix>
+   ```
+
+   Your phone should buzz within a couple of seconds.
+
+Keep the topic out of git (config.toml is gitignored), screenshots, and
+chat logs. If it ever leaks, pick a new one: update config.toml, restart
+the service, re-subscribe on the phone.
 
 ### 3. Run
 
