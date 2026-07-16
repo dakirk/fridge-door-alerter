@@ -5,8 +5,8 @@ import asyncio
 import logging
 import pathlib
 import sys
-import tomllib
 
+import tomli
 import uvicorn
 
 from alert_engine import AlertEngine
@@ -35,7 +35,7 @@ def load_config() -> dict:
     path = pathlib.Path(__file__).parent / "config.toml"
     if path.exists():
         with open(path, "rb") as f:
-            for section, values in tomllib.load(f).items():
+            for section, values in tomli.load(f).items():
                 cfg.setdefault(section, {}).update(values)
     else:
         log.warning("config.toml not found -- using defaults, ntfy disabled")
@@ -64,9 +64,9 @@ async def main() -> None:
     ))
 
     tasks = [
-        asyncio.create_task(scanner.run(), name="scanner"),
-        asyncio.create_task(engine.run(), name="alerts"),
-        asyncio.create_task(server.serve(), name="web"),
+        asyncio.create_task(scanner.run()),
+        asyncio.create_task(engine.run()),
+        asyncio.create_task(server.serve()),
     ]
     # If any task dies (e.g. the BLE adapter disappears), take the whole
     # process down and let systemd restart it.

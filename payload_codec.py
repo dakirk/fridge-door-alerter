@@ -8,6 +8,8 @@ Byte layout (after the 0xFFFF company ID, which bleak strips):
   msg_type(1) schema(1) door_state(1) battery(1) seq(2 LE) field(2 LE, 0.1 mT)
 """
 
+from __future__ import annotations
+
 import logging
 import struct
 

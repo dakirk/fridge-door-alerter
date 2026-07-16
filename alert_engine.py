@@ -2,6 +2,8 @@
 battery low. All alert timing lives here, Pi-side -- the firmware just
 broadcasts raw state."""
 
+from __future__ import annotations
+
 import asyncio
 import logging
 import time

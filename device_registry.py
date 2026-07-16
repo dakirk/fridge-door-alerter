@@ -4,6 +4,8 @@ Deliberately no persistence: the registry rebuilds itself from live
 advertisements within seconds of a restart.
 """
 
+from __future__ import annotations
+
 import collections
 import logging
 import time

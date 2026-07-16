@@ -10,11 +10,13 @@ from live advertisements within seconds.
 
 ## Setup (on the Pi)
 
-Requires Python 3.11+ and BlueZ (both standard on Raspberry Pi OS Bookworm).
+Targets Python 3.7.3 (Raspberry Pi OS Buster); requirements.txt pins the
+last dependency versions that support it.
 
 ```sh
 cd ~/fridge-door-alerter
 python3 -m venv .venv
+.venv/bin/pip install --upgrade pip
 .venv/bin/pip install -r requirements.txt
 ```
 
